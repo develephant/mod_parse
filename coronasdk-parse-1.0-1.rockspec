@@ -1,7 +1,7 @@
  package = "coronasdk-parse"
  version = "1.0-1"
  source = {
-    url = "git://github.com/develephant/Coronium-GS-Client",
+    url = "git://github.com/develephant/mod_parse",
     tag = "v0.1"
  }
  description = {
@@ -9,8 +9,8 @@
     detailed = [[
        This is the Client module for working with Parse.com and Corona SDK.  Learn more at parse.com and coronalabs.com.
     ]],
-    homepage = "https://github.com/develephant/Coronium-GS-Client",
-    license = "MIT" -- or whatever you like
+    homepage = "https://github.com/develephant/mod_parse",
+    license = "MIT"
  }
  build = {
     type = "builtin",

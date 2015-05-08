@@ -1,0 +1,2028 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Parse Module for Corona SDK</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+    <link rel="stylesheet" href="bootstrap.min.css" type="text/css" />
+</head>
+<style>
+body {
+    font-size: 1.70em;
+}
+</style>
+<body>
+
+<div class="container-fluid">
+
+
+<!-- Menu -->
+<div class="row">
+<div class="col-md-3" id="navigation">
+<br/>
+
+<div class="lead" style="font-size: 1.80em;">Parse Module</div>
+
+<h4>Contents</h4>
+<div class="list-group">
+<a href="#Data_Objects" class="list-group-item">Data Objects </a>
+<a href="#Relations" class="list-group-item">Relations </a>
+<a href="#File" class="list-group-item">File </a>
+<a href="#User" class="list-group-item">User </a>
+<a href="#Analytics" class="list-group-item">Analytics </a>
+<a href="#Roles" class="list-group-item">Roles </a>
+<a href="#Push" class="list-group-item">Push </a>
+<a href="#Installations" class="list-group-item">Installations </a>
+<a href="#Cloud" class="list-group-item">Cloud </a>
+<a href="#Session" class="list-group-item">Session </a>
+</div>
+
+
+<h4>Modules</h4>
+<ul class="$(kind=='Topics' and '' or 'nowrap' list-group">
+  <li class="list-group-item"><strong>mod_parse</strong></li>
+</ul>
+
+</div><!-- end navigation -->
+
+<div class="col-md-9" id="content">
+
+<h1>Module <code>mod_parse</code></h1>
+<p>Parse module for Corona SDK</p>
+<p>
+
+</p>
+<!--     <h3>Info:</h3> -->
+    <ul class="list-inline text-muted" style="font-size: .85em;">
+        <li><span class="label label-default">Copyright</span> develephant 2013-14</li>
+        <li><span class="label label-default">License</span> MIT
+ Generate docs with LDoc.</li>
+        <li><span class="label label-default">Author</span> Chris Byerley</li>
+    </ul>
+
+
+<h2><a href="#Data_Objects"><span class="text-muted">Data Objects </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:createObject">Parse:createObject (objClass, objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Create a new data object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:createObject">Parse:createObject (objClass, objDataTable[, _callback])</a></td>
+	<td class="summary">Create a new data object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:deleteObject">Parse:deleteObject (objClass, objId[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Delete a data object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:deleteObject">Parse:deleteObject (objClass, objId[, _callback])</a></td>
+	<td class="summary">Delete a data object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getObject">Parse:getObject (objClass, objId[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Get a data object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getObject">Parse:getObject (objClass, objId[, _callback])</a></td>
+	<td class="summary">Get a data object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getObjects">Parse:getObjects (objClass, queryTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Get objects.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getObjects">Parse:getObjects (objClass, queryTable[, _callback])</a></td>
+	<td class="summary">Get objects.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:linkObject">Parse:linkObject (parseObjectType, parseObjectId, linkField, objTypeToLink, parseObjIdToLink[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Link a data object to another object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:linkObject">Parse:linkObject (parseObjectType, parseObjectId, linkField, objTypeToLink, parseObjIdToLink[, _callback])</a></td>
+	<td class="summary">Link a data object to another object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:unlinkObject">Parse:unlinkObject (parseObjectType, parseObjectId, linkField[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Unlink a data object from another object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:unlinkObject">Parse:unlinkObject (parseObjectType, parseObjectId, linkField[, _callback])</a></td>
+	<td class="summary">Unlink a data object from another object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:updateObject">Parse:updateObject (objClass, objId, objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Update a data object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:updateObject">Parse:updateObject (objClass, objId, objDataTable[, _callback])</a></td>
+	<td class="summary">Update a data object.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#Relations"><span class="text-muted">Relations </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:createRelation">Parse:createRelation (objClass, objId, objField, objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Create a relationship.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:createRelation">Parse:createRelation (objClass, objId, objField, objDataTable[, _callback])</a></td>
+	<td class="summary">Create a relationship.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:removeRelation">Parse:removeRelation (objClass, objId, objField, objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Remove a relationship.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:removeRelation">Parse:removeRelation (objClass, objId, objField, objDataTable[, _callback])</a></td>
+	<td class="summary">Remove a relationship.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#File"><span class="text-muted">File </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:deleteFile">Parse:deleteFile (parseFileName, parseMasterKey, _callback)</a></div>
+        <div class="col-md-6" class="item-summary">Delete a file.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:deleteFile">Parse:deleteFile (parseFileName, parseMasterKey, _callback)</a></td>
+	<td class="summary">Delete a file.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:linkFile">Parse:linkFile (parseObjectType, parseObjectId, linkField, parseFileUriToLink, parseFileUriToLinkUrl[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Link a file to another object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:linkFile">Parse:linkFile (parseObjectType, parseObjectId, linkField, parseFileUriToLink, parseFileUriToLinkUrl[, _callback])</a></td>
+	<td class="summary">Link a file to another object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:unlinkFile">Parse:unlinkFile (parseObjectType, parseObjectId, linkField[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Unlink a file from another object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:unlinkFile">Parse:unlinkFile (parseObjectType, parseObjectId, linkField[, _callback])</a></td>
+	<td class="summary">Unlink a file from another object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:uploadFile">Parse:uploadFile (fileMetaTable, _callback)</a></div>
+        <div class="col-md-6" class="item-summary">Upload a file.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:uploadFile">Parse:uploadFile (fileMetaTable, _callback)</a></td>
+	<td class="summary">Upload a file.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#User"><span class="text-muted">User </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:createUser">Parse:createUser (objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Create a new User object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:createUser">Parse:createUser (objDataTable[, _callback])</a></td>
+	<td class="summary">Create a new User object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:deleteUser">Parse:deleteUser (objId[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Delete the logged in User.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:deleteUser">Parse:deleteUser (objId[, _callback])</a></td>
+	<td class="summary">Delete the logged in User.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getMe">Parse:getMe ([_callback])</a></div>
+        <div class="col-md-6" class="item-summary">Get the logged in User.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getMe">Parse:getMe ([_callback])</a></td>
+	<td class="summary">Get the logged in User.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getUser">Parse:getUser (objId[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Gets a User object.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getUser">Parse:getUser (objId[, _callback])</a></td>
+	<td class="summary">Gets a User object.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getUsers">Parse:getUsers (queryTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Get Users.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getUsers">Parse:getUsers (queryTable[, _callback])</a></td>
+	<td class="summary">Get Users.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:loginUser">Parse:loginUser (objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Log in a User.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:loginUser">Parse:loginUser (objDataTable[, _callback])</a></td>
+	<td class="summary">Log in a User.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:requestPassword">Parse:requestPassword (email[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Request a lost password reset.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:requestPassword">Parse:requestPassword (email[, _callback])</a></td>
+	<td class="summary">Request a lost password reset.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:updateUser">Parse:updateUser (objId, objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Update the logged in User.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:updateUser">Parse:updateUser (objId, objDataTable[, _callback])</a></td>
+	<td class="summary">Update the logged in User.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#Analytics"><span class="text-muted">Analytics </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:appOpened">Parse:appOpened ([_callback])</a></div>
+        <div class="col-md-6" class="item-summary">Application opened event.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:appOpened">Parse:appOpened ([_callback])</a></td>
+	<td class="summary">Application opened event.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:logEvent">Parse:logEvent (eventType, dimensionsTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Log a custom event.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:logEvent">Parse:logEvent (eventType, dimensionsTable[, _callback])</a></td>
+	<td class="summary">Log a custom event.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#Roles"><span class="text-muted">Roles </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:createRole">Parse:createRole (objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Create a new role.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:createRole">Parse:createRole (objDataTable[, _callback])</a></td>
+	<td class="summary">Create a new role.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getRole">Parse:getRole (objId[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Retrieve a role.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getRole">Parse:getRole (objId[, _callback])</a></td>
+	<td class="summary">Retrieve a role.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#Push"><span class="text-muted">Push </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:sendPush">Parse:sendPush (objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Send a push message.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:sendPush">Parse:sendPush (objDataTable[, _callback])</a></td>
+	<td class="summary">Send a push message.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#Installations"><span class="text-muted">Installations </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:createInstallation">Parse:createInstallation (objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Create a new installation.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:createInstallation">Parse:createInstallation (objDataTable[, _callback])</a></td>
+	<td class="summary">Create a new installation.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getInstallation">Parse:getInstallation (objId[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Get an installation.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getInstallation">Parse:getInstallation (objId[, _callback])</a></td>
+	<td class="summary">Get an installation.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:updateInstallation">Parse:updateInstallation (objId, objDataTable[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Update an installation.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:updateInstallation">Parse:updateInstallation (objId, objDataTable[, _callback])</a></td>
+	<td class="summary">Update an installation.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#Cloud"><span class="text-muted">Cloud </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:run">Parse:run (functionName, functionParams[, _callback])</a></div>
+        <div class="col-md-6" class="item-summary">Run cloud code.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:run">Parse:run (functionName, functionParams[, _callback])</a></td>
+	<td class="summary">Run cloud code.</td> -->
+
+	</tr>
+</table>
+<h2><a href="#Session"><span class="text-muted">Session </span></a></h2>
+<!-- <table class="function_list"> -->
+<table class="table table-bordered table-hover">
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:clearSessionToken">Parse:clearSessionToken ()</a></div>
+        <div class="col-md-6" class="item-summary">Clears the Parse sessionToken.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:clearSessionToken">Parse:clearSessionToken ()</a></td>
+	<td class="summary">Clears the Parse sessionToken.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:getSessionToken">Parse:getSessionToken ()</a></div>
+        <div class="col-md-6" class="item-summary">Returns the Parse sessionToken that is currently set.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:getSessionToken">Parse:getSessionToken ()</a></td>
+	<td class="summary">Returns the Parse sessionToken that is currently set.</td> -->
+
+	</tr>
+	<tr>
+    <td>
+    <div class="row">
+        <div class="col-md-6" class="item-name"><a href="#Parse:setSessionToken">Parse:setSessionToken (sessionToken)</a></div>
+        <div class="col-md-6" class="item-summary">Set the Parse provided sessionToken for all future calls that require it.</div>
+    </div>
+    </td>
+
+<!-- 	<td class="name" nowrap><a href="#Parse:setSessionToken">Parse:setSessionToken (sessionToken)</a></td>
+	<td class="summary">Set the Parse provided sessionToken for all future calls that require it.</td> -->
+
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Data_Objects"></a>Data Objects </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:createObject"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:createObject (objClass, objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Create a new data object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objClass</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The class object name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The data table to create the object with.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onCreateObject( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.createdAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> dataTable = { [<span class="string">"score"</span>] = <span class="number">1200</span>, [<span class="string">"cheatMode"</span>] = <span class="keyword">false</span> }
+ parse:createObject( <span class="string">"MyClass"</span>, dataTable, onCreateObject )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:deleteObject"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:deleteObject (objClass, objId[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Delete a data object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objClass</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object class name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onDeleteObject( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:deleteObject( <span class="string">"MyClass"</span>, <span class="string">"objectId"</span>, onDeleteObject )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getObject"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getObject (objClass, objId[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Get a data object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objClass</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object class name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onGetObject( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.objectId )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:getObject( <span class="string">"MyClass"</span>, <span class="string">"objectId"</span>, onGetObject )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getObjects"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getObjects (objClass, queryTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Get objects. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objClass</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object class name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">queryTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A table based query.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onGetObjects( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( #event.results )
+     <span class="comment">--OR
+</span>     <span class="global">print</span>( #events.response.results )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> queryTable = {
+   [<span class="string">"where"</span>] = { [<span class="string">"score"</span>] = { [<span class="string">"$lte"</span>] = <span class="number">2000</span> } }
+ }
+ parse:getObjects( <span class="string">"MyClass"</span>, queryTable, onGetObjects )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:linkObject"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:linkObject (parseObjectType, parseObjectId, linkField, objTypeToLink, parseObjIdToLink[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Link a data object to another object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectType</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Parse object type.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Parse object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">linkField</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The name the field to store the link.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objTypeToLink</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The type of object that is being linked.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjIdToLink</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object id of the object being linked.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">nil</span></span>
+        No link was performed.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onLinkObject( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.updatedAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:linkObject( parse.USER, <span class="string">"user-object-id"</span>, <span class="string">"stats"</span>, <span class="string">"PlayerStat"</span>, <span class="string">"player-stat-object-id"</span>, onLinkFile )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:unlinkObject"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:unlinkObject (parseObjectType, parseObjectId, linkField[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Unlink a data object from another object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectType</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Parse object type.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Parse object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">linkField</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The name the field with the link.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">nil</span></span>
+        No link was performed.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onUnlinkObject( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.updatedAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:unlinkObject( <span class="string">"Contact"</span>, <span class="string">"contact-object-id"</span>, <span class="string">"photo"</span>, onUnlinkObject )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:updateObject"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:updateObject (objClass, objId, objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Update a data object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objClass</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object class name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The data table to update the object with.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onUpdateObject( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.updatedAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> dataTable = { [<span class="string">"score"</span>] = <span class="number">5200</span>, [<span class="string">"cheatMode"</span>] = <span class="keyword">true</span> }
+ parse:updateObject( <span class="string">"MyClass"</span>, <span class="string">"objectId"</span>, dataTable, onUpdateObject )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Relations"></a>Relations </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:createRelation"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:createRelation (objClass, objId, objField, objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Create a relationship. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objClass</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object class name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objField</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object field.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The data table to attach.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onAddRelation( event )
+   <span class="global">print</span>( event.response.updatedAt )
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> dataTbl = { { [<span class="string">"className"</span>] = <span class="string">"Post"</span>, [<span class="string">"objectId"</span>] = <span class="string">"postObjectId"</span> } }
+ parse:createRelation( parse.USER, <span class="string">"userObjectId"</span>, <span class="string">"posts"</span>, dataTbl, onAddRelation )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:removeRelation"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:removeRelation (objClass, objId, objField, objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Remove a relationship. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objClass</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object class name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objField</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object field.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The data table to remove.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onRemoveRelation( event )
+   <span class="global">print</span>( event.response.updatedAt )
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> dataTbl = { { [<span class="string">"className"</span>] = <span class="string">"Post"</span>, [<span class="string">"objectId"</span>] = <span class="string">"postObjectId"</span> } }
+ parse:removeRelation( parse.USER, <span class="string">"userObjectId"</span>, <span class="string">"posts"</span>, dataTbl, onRemoveRelation )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="File"></a>File </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:deleteFile"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:deleteFile (parseFileName, parseMasterKey, _callback)</span>
+    </dt>
+    <dd>
+    <em>Delete a file.
+ This method is depreciated.  <strong>Do Not Use.</strong>
+ You should not disclose your master key in an application.</em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">parseFileName</span>
+
+
+
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseMasterKey</span>
+
+
+
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Parse:linkFile"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:linkFile (parseObjectType, parseObjectId, linkField, parseFileUriToLink, parseFileUriToLinkUrl[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Link a file to another object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectType</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Parse object type.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Parse object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">linkField</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The name of the linking field.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseFileUriToLink</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Parse supplied URI to the file.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseFileUriToLinkUrl</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The Url to the file.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">nil</span></span>
+        No file was linked.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onLinkFile( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.updatedAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:linkFile( parse.USER, <span class="string">"user-object-id"</span>, <span class="string">"avatar"</span>, <span class="string">"1234567890abcdef-photo.png"</span>, onLinkFile )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:unlinkFile"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:unlinkFile (parseObjectType, parseObjectId, linkField[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Unlink a file from another object. </p>
+
+<p> NOTE: This does not delete the file from Parse.com, you must do that seperatly.</em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectType</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The name of the class that you want to unlink the resource from.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">parseObjectId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The objectId of the class object you want to unlink the resource from.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">linkField</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The property (col) in the objClass that holds the link.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">nil</span></span>
+        No file was linked.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onUnlinkFile( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.updatedAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:unlinkFile( <span class="string">"Contact"</span>, <span class="string">"contact-object-id"</span>, <span class="string">"photo"</span>, onUnlinkFile )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:uploadFile"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:uploadFile (fileMetaTable, _callback)</span>
+    </dt>
+    <dd>
+    <em>Upload a file.
+ Supports jpg, png, gif, mp4, mov, m4v</em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fileMetaTable</span> The file meta data table.
+        <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">fileName</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The file name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">directory</span>
+         The base directory.
+         (<em>default</em> system.TemporaryDirectory)
+        </li>
+        </li></ul>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onUpload( event )
+   <span class="keyword">if</span> event.name == <span class="string">"parseResponse"</span> <span class="keyword">then</span> <span class="comment">--uploaded
+</span>     <span class="global">print</span>( event.response.name, event.response.url )
+   <span class="keyword">elseif</span> event.name == <span class="string">"parseProgress"</span> <span class="keyword">then</span> <span class="comment">--uploading
+</span>     <span class="global">print</span>( event.bytesTransferred )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:uploadFile( { [<span class="string">"filename"</span>] = <span class="string">"photo.png"</span>, [<span class="string">"baseDir"</span>] = system.DocumentsDirectory }, onUpload )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="User"></a>User </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:createUser"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:createUser (objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Create a new User object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The user data.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        Returns a network ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onCreateUser( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.createdAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> userDataTable = { [<span class="string">"username"</span>] = <span class="string">"Chris"</span>, [<span class="string">"password"</span>] = <span class="string">"strongpw"</span> }
+ parse:createUser( userDataTable, onCreateUser )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:deleteUser"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:deleteUser (objId[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Delete the logged in User.
+ <em>MUST BE LOGGED IN FIRST WITH SESSION TOKEN</em></em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onDeleteUser( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:deleteUser( <span class="string">"objectId"</span>, onDeleteUser )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getMe"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getMe ([_callback])</span>
+    </dt>
+    <dd>
+    <em>Get the logged in User.
+ <em>MUST BE LOGGED IN FIRST WITH SESSION TOKEN</em></em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onGetMe( event )
+   <span class="keyword">if</span> event.code == parse.EXPIRED <span class="keyword">then</span>
+     <span class="global">print</span>( <span class="string">"Session expired.  Log in."</span>)
+   <span class="keyword">else</span>
+     <span class="global">print</span>( <span class="string">"Hello"</span>, event.response.username )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:getUser( onGetMe )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getUser"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getUser (objId[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Gets a User object. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The User object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        Returns a network ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onGetUser( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.username )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:getUser( <span class="string">"objectId"</span>, onGetUser )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getUsers"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getUsers (queryTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Get Users. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">queryTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A query table.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onGetUsers( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( #event.results )
+     <span class="comment">--OR
+</span>     <span class="global">print</span>( #events.response.results )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> queryTable = {
+   [<span class="string">"where"</span>] = { [<span class="string">"username"</span>] = <span class="string">"Chris"</span> },
+   [<span class="string">"limit"</span>] = <span class="number">5</span>
+ }
+ parse:getUsers( queryTable, onGetUsers )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:loginUser"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:loginUser (objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Log in a User. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The data table.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+     <h3>Or</h3>
+    <ol>
+
+           <span class="types"><span class="type">nil</span></span>
+        User was not logged in.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onLoginUser( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.sessionToken )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:onLoginUser( { [<span class="string">"username"</span>] = <span class="string">"Chris"</span>, [<span class="string">"password"</span>] = <span class="string">"strongpw"</span> }, onLoginUser )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:requestPassword"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:requestPassword (email[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Request a lost password reset. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">email</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The account email address.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onRequestPassword( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:requestPassword( <span class="string">"user@email.com"</span>, onRequestPassword )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:updateUser"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:updateUser (objId, objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Update the logged in User.
+ <em>MUST BE LOGGED IN FIRST WITH SESSION TOKEN</em></em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The User object id.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The object data table.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+<span class="keyword">local</span> <span class="keyword">function</span> onUpdateUser( event )
+  <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+    <span class="global">print</span>( event.response.updatedAt )
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">local</span> dataTable = { [<span class="string">"password"</span>] = <span class="string">"newpassword"</span> }
+parse:updateUser( <span class="string">"objectId"</span>, dataTable, onUpdateUser )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Analytics"></a>Analytics </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:appOpened"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:appOpened ([_callback])</span>
+    </dt>
+    <dd>
+    <em>Application opened event. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onAppOpened( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:appOpened( onAppOpened )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:logEvent"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:logEvent (eventType, dimensionsTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Log a custom event. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">eventType</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The event type.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">dimensionsTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The table of dimensions.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onLogEvent( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:logEvent( <span class="string">"Error"</span>, { [<span class="string">"type"</span>] = <span class="string">"login"</span> }, onLogEvent )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Roles"></a>Roles </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:createRole"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:createRole (objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Create a new role. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The object data.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onCreateRole( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.createdAt )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> roleDataTable = { [<span class="string">"name"</span>] = <span class="string">"Admins"</span>, [<span class="string">"ACL"</span>] = { [<span class="string">"*"</span>] = { [<span class="string">"read"</span>] = <span class="keyword">true</span> } } }
+ parse:createRole( roleDataTable, onCreateRole )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getRole"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getRole (objId[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Retrieve a role. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onGetRole( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.ACL[<span class="string">"*"</span>][<span class="string">"read"</span>] )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:getRole( <span class="string">"objectId"</span>, onGetRole )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Push"></a>Push </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:sendPush"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:sendPush (objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Send a push message. </p>
+
+<p> <strong>NOTE: This will only work on iOS devices.</strong></em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The object data table for the Push message.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onSendPush(event)
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>(event.response)
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> pushDataTable = {
+   [<span class="string">"where"</span>] = {[<span class="string">"channels"</span>] = <span class="string">""</span>, [<span class="string">"deviceType"</span>] = <span class="string">"ios"</span>, [<span class="string">"userId"</span>] = <span class="string">"objectId"</span>},
+   [<span class="string">"data"</span>] = {[<span class="string">"alert"</span>] = <span class="string">"Collect your FREE cookies!"</span>}
+ }
+ parse:sendPush( pushDataTable, onSendPush )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Installations"></a>Installations </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:createInstallation"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:createInstallation (objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Create a new installation. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The data table.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onInstallation( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> installationDataTable = {
+   [<span class="string">"deviceType"</span>] = <span class="string">"ios"</span>,
+   [<span class="string">"deviceToken"</span>] = <span class="string">"device-token"</span>,
+   [<span class="string">"channels"</span>] = { <span class="string">""</span> },
+ }
+ parse:createInstallation( installationDataTable, onInstallation )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getInstallation"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getInstallation (objId[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Get an installation. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Parse:updateInstallation"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:updateInstallation (objId, objDataTable[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Update an installation. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">objId</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The object ID.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">objDataTable</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         The data table.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onUpdateInstallation( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> installationDataTable = {
+   [<span class="string">"channels"</span>] = { <span class="string">"aNewChannel"</span> },
+ }
+ parse:updateInstallation( installationId, installationDataTable, onUpdateInstallation )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Cloud"></a>Cloud </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:run"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:run (functionName, functionParams[, _callback])</span>
+    </dt>
+    <dd>
+    <em>Run cloud code. </em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">functionName</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The function name.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">functionParams</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         A table of parameters.
+        </li>
+        <li><span class="parameter" style="font-size: 1.10em;">_callback</span>
+            <span class="types"><span class="type">func</span></span>
+         The callback function.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">int</span></span>
+        The network request ID.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> onRun( event )
+   <span class="keyword">if</span> <span class="keyword">not</span> event.error <span class="keyword">then</span>
+     <span class="global">print</span>( event.response.value )
+   <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ parse:run( <span class="string">"Hello"</span>, { [<span class="string">"name"</span>] = <span class="string">"Chris"</span> }, onRun )</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2><a name="Session"></a>Session </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Parse:clearSessionToken"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:clearSessionToken ()</span>
+    </dt>
+    <dd>
+    <em>Clears the Parse sessionToken. </p>
+
+<p> NOTE: This does not clear or reset a user session with Parse, it only clears the sessionToken internally, in case you need to apply a new sessionToken.</em>
+
+
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">parse:clearSessionToken()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:getSessionToken"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:getSessionToken ()</span>
+    </dt>
+    <dd>
+    <em>Returns the Parse sessionToken that is currently set. </em>
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        sessionToken The session token.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> sessionToken = parse:getSessionToken()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Parse:setSessionToken"></a>
+    <span class="lead" style="font-weight:bolder;">Parse:setSessionToken (sessionToken)</span>
+    </dt>
+    <dd>
+    <em>Set the Parse provided sessionToken for all future calls that require it. </p>
+
+<p> NOTE: The sessionToken is automatically set when you log a user in through Parse.</em>
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter" style="font-size: 1.10em;">sessionToken</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The session token ID.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        The session token.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">parse:setSessionToken( sessionToken )</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- end row -->
+<!-- <div class="row">
+<div class="col-md-12">
+<div class="footer" id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
+</div>
+</div>
+</div> -->
+</div> <!-- id="container" -->
+</body>
+</html>

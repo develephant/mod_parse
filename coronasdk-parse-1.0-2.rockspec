@@ -1,8 +1,8 @@
  package = "coronasdk-parse"
- version = "1.0-1"
+ version = "1.0-2"
  source = {
     url = "git://github.com/develephant/mod_parse",
-    tag = "v0.1"
+    tag = "v0.2"
  }
  description = {
     summary = "A module for working with Parse and Corona SDK.",

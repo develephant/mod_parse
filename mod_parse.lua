@@ -2,7 +2,8 @@
 -- @copyright develephant 2013-2015
 -- @author Chris Byerley
 -- @license MIT
--- @version 2.0.1
+-- @version 2.0.2
+-- @site coronium.io
 -- Generate docs with LDoc.
 local json = require("json")
 local url = require("socket.url")
@@ -876,10 +877,9 @@ function Parse:onResponse( event )
     if status ~= -1 then
       response = event.response
 
-      decodedResponse, err = pcall( json.decode, response )
-      if err then
-        --error( 'JSON error: ' .. err );
-        print( 'JSON decode error:', err );
+      local success, decodedResponse = pcall( json.decode, response ) 
+      if not success then
+        print( 'JSON decode error:', decodedResponse );
       end
 
       if self.showJSON then

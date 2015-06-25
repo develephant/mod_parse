@@ -2,7 +2,7 @@
 -- @copyright develephant 2013-2015
 -- @author Chris Byerley
 -- @license MIT
--- @version 2.0.2
+-- @version 2.0.3
 -- @site coronium.io
 -- Generate docs with LDoc.
 local json = require("json")
@@ -872,14 +872,19 @@ function Parse:onResponse( event )
   
     local status = event.status
     local requestId = event.requestId
-    
-    local response, decodedResponse
+
+    local response
+    local decodedResponse
+
     if status ~= -1 then
       response = event.response
 
-      local success, decodedResponse = pcall( json.decode, response ) 
+      local success, decoded = pcall( json.decode, response )
+
       if not success then
-        print( 'JSON decode error:', decodedResponse );
+        print( 'JSON decode error:', decoded );
+      else
+        decodedResponse = decoded
       end
 
       if self.showJSON then
@@ -936,14 +941,6 @@ function Parse:onResponse( event )
         error = "The request timed out.",
       }
     elseif status >= 200 and status < 400 then
-      e = {
-        name = "parseResponse",
-        requestId = requestId,
-        requestType = requestType,
-        response = decodedResponse,
-        code = nil,
-        error = nil,
-      }
 
       --V 1.64 fix by Alexander Sheety
       if decodedResponse then
@@ -954,6 +951,15 @@ function Parse:onResponse( event )
           self.sessionToken = decodedResponse.sessionToken
         end
       end
+
+      e = {
+        name = "parseResponse",
+        requestId = requestId,
+        requestType = requestType,
+        response = decodedResponse,
+        code = nil,
+        error = nil,
+      }
 
     elseif status >= 400 then  -- error
       e = {

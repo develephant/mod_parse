@@ -2,23 +2,23 @@
 -- @copyright develephant 2013-2015
 -- @author Chris Byerley
 -- @license MIT
--- @version 2.1.3
+-- @version 2.1.4
 local json = require("json")
 local url = require("socket.url")
 
 ---Parse Class
 -- @type Parse
-local Parse = 
+local Parse =
 {
   appId = nil,
   apiKey = nil,
-  
+
   showStatus = false,
   showAlert = false,
   showJSON = false,
-  
+
   endpoint = "https://api.parse.com/1/",
-  
+
   sessionToken = nil,
 
   dispatcher = display.newGroup(),
@@ -47,7 +47,7 @@ local Parse =
   GET = "GET",
   PUT = "PUT",
   DELETE = "DELETE",
-  
+
   --upload types
   TEXT = "text/plain",
   PNG = "image/png",
@@ -144,7 +144,7 @@ end
 --     print( #events.response.results )
 --   end
 -- end
--- local queryTable = { 
+-- local queryTable = {
 --   ["where"] = { ["score"] = { ["$lte"] = 2000 } }
 -- }
 -- parse:getObjects( "MyClass", queryTable, onGetObjects )
@@ -178,7 +178,7 @@ function Parse:linkObject( parseObjectType, parseObjectId, linkField, objTypeToL
   else
     return self:updateObject( parseObjectType, parseObjectId, fileDataTable, _callback )
   end
-  
+
   return nil
 end
 
@@ -204,7 +204,7 @@ function Parse:unlinkObject( parseObjectType, parseObjectId, linkField, _callbac
   else
     return self:updateObject( parseObjectType, parseObjectId, fileDataTable, _callback )
   end
-  
+
   return nil
 end
 
@@ -225,12 +225,12 @@ end
 -- local dataTbl = { { ["className"] = "Post", ["objectId"] = "postObjectId" } }
 -- parse:createRelation( parse.USER, "userObjectId", "posts", dataTbl, onAddRelation )
 function Parse:createRelation( objClass, objId, objField, objDataTable, _callback )
-  
+
   local uri
   if objClass == Parse.USER then
     uri = Parse:getEndpoint( Parse.USER .. "/" .. objId )
   else
-    uri = Parse:getEndpoint( Parse.OBJECT .. "/" .. objClass .. "/" .. objId ) 
+    uri = Parse:getEndpoint( Parse.OBJECT .. "/" .. objClass .. "/" .. objId )
   end
 
   local objects = {}
@@ -239,7 +239,7 @@ function Parse:createRelation( objClass, objId, objField, objDataTable, _callbac
       { ["__type"] = "Pointer", ["className"] = objDataTable[r].className, ["objectId"] = objDataTable[r].objectId }
     )
   end
-  
+
   local objField = objField
   local relationDataTable = {
     [ objField ] = { ["__op"] = "AddRelation", ["objects"] = objects }
@@ -262,26 +262,26 @@ end
 -- local dataTbl = { { ["className"] = "Post", ["objectId"] = "postObjectId" } }
 -- parse:removeRelation( parse.USER, "userObjectId", "posts", dataTbl, onRemoveRelation )
 function Parse:removeRelation( objClass, objId, objField, objDataTable, _callback )
-  
+
   local uri
   if objClass == Parse.USER then
     uri = Parse:getEndpoint( Parse.USER .. "/" .. objId )
   else
     uri = Parse:getEndpoint( Parse.OBJECT .. "/" .. objClass .. "/" .. objId )
   end
-  
+
   local objects = {}
   for r=1, #objDataTable do
     table.insert( objects,
       { ["__type"] = "Pointer", ["className"] = objDataTable[r].className, ["objectId"] = objDataTable[r].objectId }
     )
   end
-  
+
   local objField = objField
   local relationDataTable = {
     [ objField ] = { ["__op"] = "RemoveRelation", ["objects"] = objects }
   }
-  
+
   return self:sendRequest( uri, relationDataTable, Parse.OBJECT, Parse.PUT, _callback )
 end
 
@@ -293,8 +293,8 @@ end
 -- @tab fileMetaTable The file meta data table.
 -- @string fileMetaTable.fileName The file name.
 -- @param[opt=system.TemporaryDirectory] fileMetaTable.directory The base directory.
--- @func[opt] _callback The callback function. 
--- @treturn int The network request ID. 
+-- @func[opt] _callback The callback function.
+-- @treturn int The network request ID.
 -- @usage
 -- local function onUpload( event )
 --   if event.name == "parseResponse" then --uploaded
@@ -305,20 +305,20 @@ end
 -- end
 -- parse:uploadFile( { ["filename"] = "photo.png", ["baseDir"] = system.DocumentsDirectory }, onUpload )
 function Parse:uploadFile( fileMetaTable, _callback )
-  
+
   --filename, directory
   assert( fileMetaTable.filename, "A filename is required in the meta table")
 
   --V 1.64 fix by Alexander Sheety
   local fileName = fileMetaTable.filename:gsub("%w*/","")
   local directory = fileMetaTable.baseDir or system.TemporaryDirectory
-  
+
   --determine mime
   local contentType = self:getMimeType( fileName )
-  
+
   local fileParams = self:newFileParams( contentType )
 
-  local q = { 
+  local q = {
     requestId = network.upload(
       self.endpoint .. self.FILE .. "/" .. fileName,
       self.POST,
@@ -326,15 +326,15 @@ function Parse:uploadFile( fileMetaTable, _callback )
       fileParams,
       fileName,
       directory,
-      contentType 
+      contentType
     ),
     requestType = self.FILE,
     _callback = _callback,
   }
   table.insert( self.requestQueue, q )
-  
+
   return q.requestId
-  
+
 end
 
 --V1.5 fix by https://bitbucket.org/neilhannah - Thanks!
@@ -363,7 +363,7 @@ function Parse:linkFile( parseObjectType, parseObjectId, linkField, parseFileUri
   else
     return self:updateObject( parseObjectType, parseObjectId, fileDataTable, _callback )
   end
-  
+
   return nil
 end
 
@@ -391,7 +391,7 @@ function Parse:unlinkFile( parseObjectType, parseObjectId, linkField, _callback 
   else
     return self:updateObject( parseObjectType, parseObjectId, fileDataTable, _callback )
   end
-  
+
   return nil
 end
 
@@ -480,15 +480,15 @@ end
 -- parse:onLoginUser( { ["username"] = "Chris", ["password"] = "strongpw" }, onLoginUser )
 function Parse:loginUser( objDataTable, _callback  )
   local uri = nil
-  
+
   if objDataTable.authData == nil then
     uri = Parse:getEndpoint( Parse.LOGIN )
     return self:sendQuery( uri, objDataTable, Parse.LOGIN, _callback )
   else --facebook/twitter/UUID login
     uri = Parse:getEndpoint( Parse.USER )
-    return self:sendRequest( uri, objDataTable, Parse.USER, Parse.POST, _callback )   
+    return self:sendRequest( uri, objDataTable, Parse.USER, Parse.POST, _callback )
   end
-  
+
   return nil
 end
 
@@ -507,9 +507,9 @@ end
 --local dataTable = { ["password"] = "newpassword" }
 --parse:updateUser( "objectId", dataTable, onUpdateUser )
 function Parse:updateUser( objId, objDataTable, _callback  )
-  
+
   assert( self.sessionToken, "User must be logged in first, sessionToken cannot be nil.")
-  
+
   local uri = Parse:getEndpoint( Parse.USER .. "/" .. objId )
   return self:sendRequest( uri, objDataTable, Parse.USER, Parse.PUT, _callback )
 end
@@ -528,9 +528,9 @@ end
 -- end
 -- parse:getUser( onGetMe )
 function Parse:getMe( _callback )
-  
+
   assert( self.sessionToken, "User must be logged in first, sessionToken cannot be nil.")
-  
+
   local uri = Parse:getEndpoint( Parse.USER .. "/me" )
   return self:sendRequest( uri, {}, Parse.USER, Parse.GET, _callback )
 end
@@ -548,9 +548,9 @@ end
 -- end
 -- parse:deleteUser( "objectId", onDeleteUser )
 function Parse:deleteUser( objId, _callback  )
-  
+
   assert( self.sessionToken, "User must be logged in first, sessionToken cannot be nil.")
-  
+
   local uri = Parse:getEndpoint( Parse.USER .. "/" .. objId )
   return self:sendRequest( uri, {}, Parse.USER, Parse.DELETE, _callback )
 end
@@ -568,7 +568,7 @@ end
 -- parse:requestPassword( "user@email.com", onRequestPassword )
 function Parse:requestPassword( email, _callback  )
   local uri = Parse:getEndpoint( "requestPasswordReset" )
-  return self:sendRequest( uri, { ["email"] = email }, Parse.USER, Parse.POST, _callback )  
+  return self:sendRequest( uri, { ["email"] = email }, Parse.USER, Parse.POST, _callback )
 end
 
 ---Analytics
@@ -587,7 +587,7 @@ end
 function Parse:appOpened( _callback )
   local uri = Parse:getEndpoint( Parse.ANALYTICS .. "/AppOpened" )
   local requestParams = {}
-  return self:sendRequest( uri, { at = "" }, Parse.ANALYTICS, Parse.POST, _callback )  
+  return self:sendRequest( uri, { at = "" }, Parse.ANALYTICS, Parse.POST, _callback )
 end
 
 ---Log a custom event.
@@ -604,7 +604,7 @@ end
 -- parse:logEvent( "Error", { ["type"] = "login" }, onLogEvent )
 function Parse:logEvent( eventType, dimensionsTable, _callback )
   dimensionsTable = dimensionsTable or {}
-  
+
   local uri = Parse:getEndpoint( Parse.ANALYTICS .. "/" .. eventType )
   local requestParams = {
     ["dimensions"] = dimensionsTable
@@ -668,7 +668,7 @@ end
 -- local pushDataTable = {
 --   ["where"] = {["channels"] = "", ["deviceType"] = "ios", ["userId"] = "objectId"},
 --   ["data"] = {["alert"] = "Collect your FREE cookies!"}
--- } 
+-- }
 -- parse:sendPush( pushDataTable, onSendPush )
 function Parse:sendPush(objDataTable, _callback)
   local uri = Parse:getEndpoint( Parse.PUSH )
@@ -718,7 +718,7 @@ function Parse:updateInstallation( objId, objDataTable, _callback )
   local uri = Parse:getEndpoint( Parse.INSTALLATION .. "/" .. objId )
   return self:sendRequest( uri, objDataTable, Parse.INSTALLATION, Parse.PUT, _callback ) --returns requestId
 end
- 
+
 ---Get an installation.
 -- @string objId The object ID.
 -- @func[opt] _callback The callback function.
@@ -745,7 +745,7 @@ end
 -- parse:run( "Hello", { ["name"] = "Chris" }, onRun )
 function Parse:run( functionName, functionParams, _callback )
   functionParams = functionParams or {[""] = ""}
-  
+
   local uri = Parse:getEndpoint( Parse.CLOUD .. "/" .. functionName )
   return self:sendRequest( uri, functionParams, Parse.CLOUD, Parse.POST, _callback ) --returns requestId
 end
@@ -763,17 +763,17 @@ end
 
 function Parse:sendRequest( uri, requestParamsTbl, requestType, action, _callback, masterKey )
   local requestParams = self:buildRequestParams( requestParamsTbl, masterKey )
-  
+
   requestType = requestType or Parse.NIL
   action = action or Parse.POST
 
-  local q = { 
+  local q = {
     requestId = network.request( uri, action, function(e) Parse:onResponse(e); end, requestParams ),
     requestType = requestType,
     _callback = _callback,
   }
   table.insert( self.requestQueue, q )
-  
+
   return q.requestId
 end
 
@@ -784,14 +784,14 @@ function Parse:buildQueryParams( withQueryTable )
     if uri ~= "" then
       uri = uri .. "&"
     end
-    
+
     local value = v
     if key == "where" then
       value = url.escape( json.encode( v ) )
     end
-    
+
     uri = uri .. tostring( key ) .. "=" .. value
-    
+
   end
   return self:newRequestParams( uri ) --for use in a network request
 end
@@ -801,7 +801,7 @@ function Parse:sendQuery( uri, queryParamsTbl, requestType, _callback )
 
   requestType = requestType or Parse.NIL
   --action = action or Parse.GET
-  
+
   local queryUri = uri .. "?" .. requestParams.body
   queryUri = string.gsub( queryUri, "%s+", '%20' )
 
@@ -810,7 +810,7 @@ function Parse:sendQuery( uri, queryParamsTbl, requestType, _callback )
     _callback = _callback,
   }
   table.insert( self.requestQueue, q )
-  
+
   return q.requestId
 end
 
@@ -822,13 +822,13 @@ end
 
 function Parse:sendFile( uri, requestParamsTbl, requestType, action )
   local requestParams = self:buildRequestParams( requestParamsTbl )
-  
+
   requestType = requestType or Parse.NIL
   action = action or Parse.POST
 
   local q = { requestId = network.request( uri, action, function(e) Parse:onResponse(e); end, requestParams ), requestType = requestType }
   table.insert( self.requestQueue, q )
-  
+
   return q.requestId
 end
 
@@ -917,9 +917,9 @@ end
 
 function Parse:onResponse( event )
   if event.phase == "ended" then
-  
+
     --== Empty response event table
-    local e = 
+    local e =
     {
       name = "parseResponse",
       requestId = 0,
@@ -1029,7 +1029,7 @@ function Parse:onResponse( event )
     local url = event.url or ""
 
     local _callback = nil
-    
+
     for r=1, #self.requestQueue do
       local request = self.requestQueue[ r ]
       if request.requestId == requestId then
@@ -1056,17 +1056,17 @@ function Parse:newRequestParams( bodyData, masterKey )
   local headers = {}
   headers["X-Parse-Application-Id"] = self.appId
   headers["X-Parse-REST-API-Key"] = self.apiKey
-  
+
   --session?
   if self.sessionToken then
     headers["X-Parse-Session-Token"] = self.sessionToken
   end
-  
+
   --masterkey?
   if masterKey then
     headers["X-Parse-Master-Key"] = masterKey
   end
-  
+
   headers["Content-Type"] = "application/json"
 
   --populate parameters for the network call
@@ -1083,7 +1083,7 @@ function Parse:newFileParams( contentType )
   local headers = {}
   headers["X-Parse-Application-Id"] = self.appId
   headers["X-Parse-REST-API-Key"] = self.apiKey
-  
+
   local requestParams = {}
 
   headers["Content-Type"] = contentType
@@ -1125,7 +1125,7 @@ function Parse:getMimeType( filePath )
   elseif string.find( path, ".m4v" ) ~= nil then
     mime = self.M4V
   end
-  
+
   return mime
 end
 

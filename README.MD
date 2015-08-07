@@ -6,7 +6,7 @@
 
 :page_facing_up: **Documentation and usage is [in the wiki](https://github.com/develephant/mod_parse/wiki).**
 
-This module is only compatible with Corona SDK.
+This module is only compatible with [Corona SDK](http://www.coronalabs.com)
 
 Twitter: [@develephant](http://twitter.com/develephant)
 

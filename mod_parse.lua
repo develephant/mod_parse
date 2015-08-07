@@ -3,6 +3,7 @@
 -- @author Chris Byerley
 -- @license MIT
 -- @version 2.2.0
+-- @see parse.com
 local json = require("json")
 local url = require("socket.url")
 
@@ -18,9 +19,10 @@ local Parse =
   --in the main terminal.
   showStatus = false, --default: false
 
-  --Supress the http headers in the
+  --Show the http headers in the
   --Parse response status output.
-  showStatusHeaders = false, --default: true
+  --showStatus must be 'true' as well.
+  showStatusHeaders = false, --default: false
 
   --Output some basic information in
   --a pop-up alert. Best for phone.
@@ -976,6 +978,11 @@ function Parse:onResponse( event )
 
       httpStatusCode = response_data.status or 0 -- http status code
     }
+
+    --check showStatusHeaders flag
+    if self.showStatusHeaders == false then
+      return_data.headers = nil;
+    end
 
     -- Start working with the response
     -- first checking for Parse errors

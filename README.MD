@@ -2,7 +2,7 @@
 
 ### A Parse.com module for Corona SDK.
 
-> Please read the most recent [release notes](https://github.com/develephant/mod_parse/wiki/Notes-on-2.2.x) to get an overview of the changes from the 2.1.x version.
+> Please read the most recent [release notes](https://github.com/develephant/mod_parse/wiki/Release-Notes:-2.2.x) to get an overview of the changes from the 2.1.x version.
 
 :page_facing_up: **Documentation and usage is [in the wiki](https://github.com/develephant/mod_parse/wiki).**
 

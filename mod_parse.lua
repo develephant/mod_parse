@@ -2,7 +2,7 @@
 -- @copyright develephant 2013-2015
 -- @author Chris Byerley
 -- @license MIT
--- @version 2.1.4
+-- @version 2.2.0
 local json = require("json")
 local url = require("socket.url")
 
@@ -10,21 +10,50 @@ local url = require("socket.url")
 -- @type Parse
 local Parse =
 {
-  appId = nil,
-  apiKey = nil,
+--===========================================================================--
+--== Options Start
+--===========================================================================--
 
-  showStatus = false,
-  showAlert = false,
-  showJSON = false,
+  --Shows a clean table/object output
+  --in the main terminal.
+  showStatus = false, --default: false
 
+  --Supress the http headers in the
+  --Parse response status output.
+  showStatusHeaders = false, --default: true
+
+  --Output some basic information in
+  --a pop-up alert. Best for phone.
+  showAlert = false, --default: false
+
+  --Output the Parse response as
+  --JSON in the output console.
+  showJSON = false, --default: false
+
+  --Put 'results' outside of the 'response' key.
+  --By default when you recieve multiple records,
+  --the result set is put in a 'results' key on
+  --the 'response' object. To instead place the
+  --'results' key directly on the main object
+  --set this to 'false'. You would then access
+  --the results directly: `parse_response.results`
+  --as opposed to: `parse_response.response.results`
+  --Only works with multi-object response results.
+  resultsInResponse = true, --default: true
+
+--===========================================================================--
+--== Options Done.  Nothing to see here...
+--===========================================================================--
+
+  --Various initialization
   endpoint = "https://api.parse.com/1/",
-
   sessionToken = nil,
-
   dispatcher = display.newGroup(),
 
+  --Set up clean request queue
   requestQueue = {},
 
+  --Parse endpoints
   NIL = nil,
   ERROR = "ERROR",
   EXPIRED = 101,
@@ -54,7 +83,12 @@ local Parse =
   JPG = "images/jpeg",
   MOV = "video/quicktime",
   M4V = "video/x-m4v",
-  MP4 = "video/mp4"
+  MP4 = "video/mp4",
+
+  --set these with the init method
+  --not directly in the file.
+  appId = nil,
+  apiKey = nil
 }
 
 ---Data Objects
@@ -477,7 +511,7 @@ end
 --     print( event.response.sessionToken )
 --   end
 -- end
--- parse:onLoginUser( { ["username"] = "Chris", ["password"] = "strongpw" }, onLoginUser )
+-- parse:loginUser( { ["username"] = "Chris", ["password"] = "strongpw" }, onLoginUser )
 function Parse:loginUser( objDataTable, _callback  )
   local uri = nil
 
@@ -867,45 +901,31 @@ end
 --======================================================================--
 --== RESPONSE
 --======================================================================--
-function Parse:_throwError( e )
-  local _callback = nil
-
-  for r=1, #self.requestQueue do
-    local req = self.requestQueue[ r ]
-    if req.requestId == e.req_id then
-      --Set up callback
-      _callback = req._callback
-      --Remove request
-      table.remove( self.requestQueue, r )
-      break
-    end
-  end
-
-  _callback( e )
-end
-
 function Parse:_debugOutput( e )
-
   --== Show JSON flag
   if self.showJSON then
-    print( e.response )
-  end
-  --== Show status flag
-  if self.showStatus then
-    if type( e.response ) == 'table' then
-      Parse:printTable( e.response )
-    else
-      print( e.response )
+    if e.response ~= nil then
+      print( json.encode( e.response ) )
     end
   end
-  --== Show alert flag
+  --== Show Status flag
+  if self.showStatus then
+    if e ~= nil then
+      if type(e) == 'table' then
+        self:printTable( e )
+      else
+        print('non-table response')
+      end
+    end
+  end
+  --== Show Alert flag
   if self.showAlert then
-    local msg = string.format( "Net Status: %d \n", e.status )
+    local msg = string.format( "Net Status: %d \n", e.httpStatusCode )
     --check error
-    if e.response and e.response.code then
-      msg = msg .. string.format( "Parse Code: %d \n", e.response.code )
-      if e.response.error then
-        msg = msg .. string.format( "Error: %s", e.response.error )
+    if e.error then
+      msg = msg .. string.format( "Parse Code: %d \n", e.code )
+      if e.error then
+        msg = msg .. string.format( "Error: %s", e.error )
       end
     else
       msg = "Parse action was successful!"
@@ -913,108 +933,136 @@ function Parse:_debugOutput( e )
 
     native.showAlert( "Parsed!", msg, { "OK" } )
   end
+
 end
 
+--== Parse response handler
+--== proceed with caution...
 function Parse:onResponse( event )
   if event.phase == "ended" then
 
-    --== Empty response event table
-    local e =
+    -- Table to hold event response data
+    local response_data =
     {
-      name = "parseResponse",
-      requestId = 0,
-      requestType = "",
-      response = {},
-      results = {},
-      headers = {},
-      code = 0,
-      error = ""
+      bytesEstimated = event.bytesEstimated,
+      bytesTransferred = event.bytesTransferred,
+      isError = event.isError, --Network error
+      requestId = event.requestId,
+      response = event.response,
+      responseHeaders = event.responseHeaders,
+      responseType = event.responseType,
+      status = event.status, --Network call status
+      url = event.url --The original requested url
     }
 
-    --== Grab some values
-    local net_error = event.isError
-    local status    = event.status
-    local response  = event.response
-    local req_id    = event.requestId
-    local headers   = event.responseHeaders
+    -- Table for return_data, initialized
+    local return_data =
+    {
+      --Name of the return event
+      name = "parseResponse",
+      --The Parse request "type" - Parse.USER, etc.
+      requestType = nil, --Set later
 
-    --== Do we have a network error?
-    if net_error then
-      e.req_id = req_id
-      e.error = "Network Error. Connected?"
-      e.code  = status
+      response = nil, --Set later
+      results = nil, --Set later (maybe)
 
-      self:_throwError( e )
-      return
+      headers = response_data.responseHeaders or {}, --Incoming headers
+
+      code = nil, --Parse response code (-1 if no network)
+      error = nil, -- String final error code, can pass Parse errors
+
+      networkError = response_data.isError, -- 404 is not a networkError (Bool)
+      networkBytesTransferred = response_data.bytesTransferred or 0,
+
+      httpStatusCode = response_data.status or 0 -- http status code
+    }
+
+    -- Start working with the response
+    -- first checking for Parse errors
+    local HAS_ERROR = false
+    if response_data and return_data then
+      -- Make sure we something to work with, or else.
+      assert(response_data, "response_data table missing.")
+      assert(return_data, "return_data table missing.")
+
+      local response_chk = json.decode( response_data.response )
+
+      --Check for Parse error in decoded response
+      if response_chk and type( response_chk ) == 'table' then
+        if response_chk.error then
+          return_data.error = response_chk.error
+        end
+        -- Probably has a code too.
+        if response_chk.code then
+          return_data.code = response_chk.code
+        end
+      end -- end response check if
     end
 
-    --== Check status for error
-    if status < 200 and status >= 400 then
-      e.req_id = req_id
-      e.error = "Bad Status"
-      e.code  = status
-
-      self:_throwError( e )
-      return
+    -- Do we have an error?
+    if return_data.error then
+      HAS_ERROR = true --doh!
     end
 
-    --== Convert JSON string response to table
-    local success, response = pcall( json.decode, response )
+    -- If error, skip the response and
+    -- results since we got hosed anyway.
+    if HAS_ERROR == false then
 
-    if not success then
-      e.req_id = req_id
-      e.error = response
-      e.code = -99
+      --Transfer a 'tabled' response from Parse response
+      if response_data.response ~= nil then
+        return_data.response = json.decode( response_data.response )
+      end
 
-      Parse:_throwError( e )
-      return
+      -- Check 'resultsInResponse' flag.
+      -- false means do not place the multi
+      -- 'results' in the 'response' object.
+      if self.resultsInResponse == false then
+        if return_data.response ~= nil then
+          if return_data.response.results then --we have a 'results' key
+            return_data.results = return_data.response.results
+            return_data.response.results = nil
+          end
+        end
+      end
     end
 
-    --Add incoming headers
-    e.headers = headers
+    --== Debug output
+    self:_debugOutput( return_data )
 
-    --== Find request
-    local req_type  = Parse.NIL
+    --== Start preparing to respond
+    local request_id = response_data.requestId
+
     local _callback = nil
 
     for r=1, #self.requestQueue do
       local req = self.requestQueue[ r ]
-      if req.requestId == req_id then
-        --Add request type, id to event obj
-        e.requestType = req.requestType
-        e.requestId = req.requestId
+      if req.requestId == request_id then
+        --Add the Parse request type
+        return_data.requestType = req.requestType
+        --set session if log in
+        if return_data.requestType == 'login' then
+          if return_data.response.sessionToken then
+            self.sessionToken = return_data.response.sessionToken
+          end
+        end
         --Set up callback
         _callback = req._callback
         --Remove request
         table.remove( self.requestQueue, r )
+        --see ya.
         break
       end
     end
 
-    --== Check for response
-    if response then
-      e.response = response
-    end
-
-    --== Check for session token
-    if response and response.sessionToken then
-      self.sessionToken = response.sessionToken
-    end
-
-    --== Check for multiple results
-    if response and response.results then
-      e.results = response.results
-    end
-
-    --== Debug output
-    self:_debugOutput( e )
+    --tidy up
+    response_data = nil
 
     --== Send Response
-    if e.requestId then
+    if return_data.name == 'parseResponse' then
       if _callback then
-        _callback( e )
+        _callback( return_data )
       else --use global
-        self.dispatcher:dispatchEvent( e )
+        self.dispatcher:dispatchEvent( return_data )
       end
     end
 
@@ -1049,7 +1097,7 @@ function Parse:onResponse( event )
       _callback( e )
     end
   end
-end
+end -- end-if Parse:onResponse
 
 function Parse:newRequestParams( bodyData, masterKey )
   --set up headers

@@ -12,7 +12,7 @@ Twitter: [@develephant](http://twitter.com/develephant)
 
 Web: [develephant.net](http://develephant.net)
 
-###Other Corona Tools by Develephant:
+####Other Corona Tools by Develephant:
 
 [Coronium Cloud Platform](http://coronium.io)
 

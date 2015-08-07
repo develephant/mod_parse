@@ -1,4 +1,6 @@
-# mod_parse
+# mod_parse 2.2.x
+
+:page_facing_up: Please read the most recent [release notes](Notes-on-2.2.x) to get an overview of the changes from the 2.1.x version.
 
 **Documentation and usage is [in the wiki](https://github.com/develephant/mod_parse/wiki).**
 

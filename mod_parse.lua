@@ -2,7 +2,7 @@
 -- @copyright develephant 2013-2015
 -- @author Chris Byerley
 -- @license MIT
--- @version 2.2.0
+-- @version 2.2.3
 -- @see parse.com
 local json = require("json")
 local url = require("socket.url")

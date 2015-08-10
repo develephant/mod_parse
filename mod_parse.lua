@@ -2,7 +2,7 @@
 -- @copyright develephant 2013-2015
 -- @author Chris Byerley
 -- @license MIT
--- @version 2.2.3
+-- @version 2.2.4
 -- @see parse.com
 local json = require("json")
 local url = require("socket.url")
@@ -1048,8 +1048,12 @@ function Parse:onResponse( event )
         return_data.requestType = req.requestType
         --set session if log in
         if return_data.requestType == 'login' then
-          if return_data.response.sessionToken then
-            self.sessionToken = return_data.response.sessionToken
+          if return_data.response then
+            if return_data.response.sessionToken then
+              self.sessionToken = return_data.response.sessionToken
+            else
+              self.sessionToken = nil
+            end
           end
         end
         --Set up callback

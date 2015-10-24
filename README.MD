@@ -16,4 +16,4 @@ Web: [develephant.net](http://develephant.net)
 
 [Coronium Cloud Platform](http://coronium.io)
 
-[Coronium Game Server](http://coronium.gs)
+[Coronium ACE](http://coronium-ace.readthedocs.org)

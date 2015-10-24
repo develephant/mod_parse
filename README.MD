@@ -14,6 +14,8 @@ Web: [develephant.net](http://develephant.net)
 
 ####Other Corona Tools by Develephant:
 
-[Coronium Cloud Platform](http://coronium.io)
+[Coronium Cloud](http://coronium.io)
 
 [Coronium ACE](http://coronium-ace.readthedocs.org)
+
+[Eventable](https://github.com/develephant/Eventable)

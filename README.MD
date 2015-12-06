@@ -1,4 +1,4 @@
-### mod_parse has been replaced the Parse plugin for Corona SDK.
+### mod_parse has been replaced with the Parse plugin for Corona SDK.
 
 __You are free to continue using mod_parse, but it will no longer be updated.__
 

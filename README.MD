@@ -1,10 +1,9 @@
-### mod_parse has been replaced with the more current Parse plugin for Corona SDK.
+### mod_parse has been replaced the Parse plugin for Corona SDK.
 
 __You are free to continue using mod_parse, but it will no longer be updated.__
 
 ## [Get the New Parse Plugin for Corona SDK](http://parse.develephant.com)
 
----
 
 mod_parse 2.2.x
 
